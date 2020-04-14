@@ -64,7 +64,8 @@ public class CompanyTest {
 							try {
 								memberNumber = Input.getInteger("Team Member Number: ");
 								memberDivision = Input.getString("Team Member Division: ");
-								company.addTeamMember(company.findProject(projectTitle), new TeamMember(memberName, memberNumber, memberDivision));
+								company.addTeamMember(project, new TeamMember(memberName, memberNumber, memberDivision));
+								System.out.println("The team member " + '"' + memberName + '"' + " has been added");
 							} catch (Exception exception) {
 								System.out.println("Invalid value entered");
 							}

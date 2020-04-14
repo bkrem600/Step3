@@ -38,27 +38,6 @@ public class TreeNode<T extends Comparable<T>> {
 		}
 	}
 
-	public T find(T data){
-		if (this.data.equals(data)) {
-			return this.data;
-		}
-		T leftFind = null, rightFind = null;
-		if (this.leftNode != null) {
-			if (this.data.compareTo(data) > 0) {
-				leftFind = leftNode.find(data);
-			}
-		}
-		if (leftFind != null) {
-			return leftFind;
-		}
-		if (this.rightNode != null) {
-			if(this.data.compareTo(data) < 0) {
-				rightFind = rightNode.find(data);
-			}
-		}
-		return rightFind;
-	}
-
 	public TreeNode<T> remove(TreeNode<T> root, T data) {
 		if (root == null) {
 			return null;
@@ -85,6 +64,27 @@ public class TreeNode<T extends Comparable<T>> {
 		} else {
 			return root;
 		}
+	}
+
+	public T find(T data){
+		if (this.data.equals(data)) {
+			return this.data;
+		}
+		T leftFind = null, rightFind = null;
+		if (this.leftNode != null) {
+			if (this.data.compareTo(data) > 0) {
+				leftFind = leftNode.find(data);
+			}
+		}
+		if (leftFind != null) {
+			return leftFind;
+		}
+		if (this.rightNode != null) {
+			if(this.data.compareTo(data) < 0) {
+				rightFind = rightNode.find(data);
+			}
+		}
+		return rightFind;
 	}
 
 	public T getData() {

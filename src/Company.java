@@ -20,7 +20,6 @@ public class Company {
 	public Project findProject(String title) {
 		ArrayList<Project> inOrder = projects.inOrderTraversal();
 		if (inOrder.size() > 0) {
-			System.out.println(inOrder.size());
 			for (Project project : inOrder) {
 				if (project.getTitle().equalsIgnoreCase(title)) {
 					return project;

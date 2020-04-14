@@ -38,7 +38,6 @@ public class BinaryTree<T extends Comparable<T>> {
         inOrderHelper(node.getRightNode(), inOrder);
 	}
 
-	// NEVER USED ??
 	public T find(T data) {
 		return root.find(data);
 	}
