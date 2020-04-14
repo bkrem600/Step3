@@ -34,7 +34,8 @@ public class CompanyTest {
 					}
 				case 1:
 					projectTitle = Input.getString("Project title: ");
-					if (company.findProject(projectTitle) == null) {
+					Project project = company.findProject(projectTitle);
+					if (project == null) {
 						startDate = Input.getString("Project start date: ");
 						endDate = Input.getString("Project end date: ");
 						company.addProject(new Project(projectTitle, startDate, endDate));
@@ -45,8 +46,9 @@ public class CompanyTest {
 					break;
 				case 2:
 					projectTitle = Input.getString("Project title: ");
-					if (company.findProject(projectTitle) != null) {
-						company.removeProject(company.findProject(projectTitle));
+					project = company.findProject(projectTitle);
+					if (project != null) {
+						company.removeProject(project);
 						System.out.println("The project " + '"' + projectTitle + '"' + " has been removed");
 					} else {
 						System.out.println("The project " + '"' + projectTitle + '"' + " could not be found");
@@ -54,55 +56,82 @@ public class CompanyTest {
 					break;
 				case 3:
 					projectTitle = Input.getString("Project title: ");
-					if (company.findProject(projectTitle) != null) {
+					project = company.findProject(projectTitle);
+					if (project != null) {
 						memberName = Input.getString("Team Member Name: ");
-						memberNumber = Input.getInteger("Team Member Number: ");
-						memberDivision = Input.getString("Team Member Division: ");
-						company.addTeamMember(company.findProject(projectTitle), new TeamMember(memberName, memberNumber, memberDivision));
+						TeamMember member = project.findTeamMember(memberName);
+						if (member == null) {
+							try {
+								memberNumber = Input.getInteger("Team Member Number: ");
+								memberDivision = Input.getString("Team Member Division: ");
+								company.addTeamMember(company.findProject(projectTitle), new TeamMember(memberName, memberNumber, memberDivision));
+							} catch (Exception exception) {
+								System.out.println("Invalid value entered");
+							}
+						} else {
+							System.out.println("The team member " + '"' + memberName + '"' + " already exists");
+						}
 					} else {
 						System.out.println("The project " + '"' + projectTitle + '"' + " could not be found");
 					}
 					break;
 				case 4:
 					projectTitle = Input.getString("Project title: ");
-					if (company.findProject(projectTitle) != null) {
+					project = company.findProject(projectTitle);
+					if (project != null) {
 						memberName = Input.getString("Team Member Name: ");
-						company.removeTeamMember(company.findProject(projectTitle), new TeamMember(memberName, 0, ""));
+						TeamMember member = project.findTeamMember(memberName);
+						if (member != null) {
+							company.removeTeamMember(project, member);
+							System.out.println("The team member " + '"' + memberName + '"' + " has been removed");
+						} else {
+							System.out.println("The team member " + '"' + memberName + '"' + " could not be found");
+						}
 					} else {
 						System.out.println("The project " + '"' + projectTitle + '"' + " could not be found");
 					}
 					break;
 				case 5:
 					projectTitle = Input.getString("Project title: ");
-					Project project = company.findProject(projectTitle);
+					project = company.findProject(projectTitle);
 					if (project != null) {
-						System.out.println("PROJECT DETAILS\t\t\t\t\tMEMBER DETAILS\n" + project.toString());
+						System.out.println("\n" + project.toString());
+						company.displayTeamMembers(project);
 					} else {
 						System.out.println("The project " + '"' + projectTitle + '"' + " could not be found");
 					}
 					break;
 				case 6:
-					company.displayAllProjects();
+					company.displayAll();
 					break;
 				case 7:
-					// Code here
+					company.displayAllNumbers();
 					break;
 				case 8:
-					Project project1 = new Project("Web site creation", "01/01/18", "21/01/18");
-					Project project2 = new Project("Database stuff", "03/06/19", "22/06/19");
-					Project project3 = new Project("Structures class", "06/09/20", "23/09/20");
+					System.out.println("Populated with data for testing purposes");
+					Project project1 = new Project("test1", "01/01/18", "21/01/18");
+					Project project2 = new Project("test2", "03/06/19", "22/06/19");
+					Project project3 = new Project("test3", "06/09/20", "23/09/20");
+					Project project4 = new Project("test4", "03/01/20", "25/03/20");
 					TeamMember member1 = new TeamMember("Joe Bloggs", 1111, "Web Development");
 					TeamMember member2 = new TeamMember("Chris Douglas", 2222, "Database");
 					TeamMember member3 = new TeamMember("Boryana Kremakova", 3333, "Programming");
-					company.addProject(project1);
-					company.addProject(project2);
+					TeamMember member4 = new TeamMember("Connor Dillon", 4444, "Uml shite");
+					TeamMember member5 = new TeamMember("Benjamin Cattermole", 5555, "Please stop");
+					TeamMember member6 = new TeamMember("Finlay Ross", 6666, "I hate java");
 					company.addProject(project3);
+					company.addProject(project2);
+					company.addProject(project1);
+					company.addProject(project4);
 					company.addTeamMember(project1, member1);
 					company.addTeamMember(project1, member2);
-					company.addTeamMember(project2, member3);
+					company.addTeamMember(project1, member3);
+					company.addTeamMember(project2, member4);
+					company.addTeamMember(project2, member5);
+					company.addTeamMember(project3, member6);
 					break;
 				default:
-					System.out.println("Please enter valid option from the menu");
+					System.out.println("Please enter a valid option from the menu");
 			}
 		}
 	}

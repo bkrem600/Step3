@@ -8,17 +8,34 @@ public class TreeNode<T extends Comparable<T>> {
 		this.data = data;
 	}
 
-	@Override
 	public String toString() {
-		String string = "";
+		String treeNodeDetails  = "";
 		if (leftNode != null) {
-			string += leftNode.toString() + "\n";
+			treeNodeDetails  += leftNode.toString() + "\n";
 		}
-		string += this.data.toString() + "\n";
+		treeNodeDetails  += this.data.toString() + "\n";
 		if (rightNode != null) {
-			string += rightNode.toString() + "\n";
+			treeNodeDetails  += rightNode.toString() + "\n";
 		}
-		return string;
+		return treeNodeDetails ;
+	}
+
+	public void insert(T data){
+		if (this.data.compareTo(data) > 0) {
+			if (this.leftNode == null) {
+				this.leftNode = new TreeNode<>(data);
+				return;
+			} else {
+				this.leftNode.insert(data);
+			}
+		}
+		if (this.data.compareTo(data) < 0) {
+			if (this.rightNode == null) {
+				this.rightNode = new TreeNode<>(data);
+			} else {
+				this.rightNode.insert(data);
+			}
+		}
 	}
 
 	public T find(T data){
@@ -39,31 +56,7 @@ public class TreeNode<T extends Comparable<T>> {
 				rightFind = rightNode.find(data);
 			}
 		}
-		if (rightFind != null) {
-			return rightFind;
-		} else {
-			return null;
-		}
-	}
-
-	public boolean insert(T data){
-		if (this.data.compareTo(data) > 0) {
-			if (this.leftNode == null) {
-				this.leftNode = new TreeNode<>(data);
-				return true;
-			} else {
-				this.leftNode.insert(data);
-			}
-		}
-		if (this.data.compareTo(data) < 0) {
-			if (this.rightNode == null) {
-				this.rightNode = new TreeNode<>(data);
-				return true;
-			} else {
-				this.rightNode.insert(data);
-			}
-		}
-		return false;
+		return rightFind;
 	}
 
 	public TreeNode<T> remove(TreeNode<T> root, T data) {
@@ -80,15 +73,15 @@ public class TreeNode<T extends Comparable<T>> {
 			} else if (root.rightNode == null) {
 				return root.leftNode;
 			}
-			root.data = findMinNode(root.rightNode).data;
+			root.data = findMinValue(root.rightNode).data;
 			root.rightNode = remove(root.rightNode, root.data);
 		}
 		return root;
 	}
 
-	public TreeNode<T> findMinNode(TreeNode<T> root) {
+	public TreeNode<T> findMinValue(TreeNode<T> root) {
 		if (root.leftNode != null) {
-			return findMinNode(root.leftNode);
+			return findMinValue(root.leftNode);
 		} else {
 			return root;
 		}

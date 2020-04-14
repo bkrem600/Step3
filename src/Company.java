@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Company {
 
 	private String name;
@@ -16,12 +18,16 @@ public class Company {
 	}
 
 	public Project findProject(String title) {
-		Project project = new Project(title, "", "");
-		try {
-			return projects.find(project);
-		} catch (Exception exception) {
-			return null;
+		ArrayList<Project> inOrder = projects.inOrderTraversal();
+		if (inOrder.size() > 0) {
+			System.out.println(inOrder.size());
+			for (Project project : inOrder) {
+				if (project.getTitle().equalsIgnoreCase(title)) {
+					return project;
+				}
+			}
 		}
+		return null;
 	}
 
 	public void addTeamMember(Project project, TeamMember teamMember) {
@@ -32,23 +38,38 @@ public class Company {
 		project.removeTeamMember(teamMember);
 	}
 
-//    public void displayTeamMembers(Project project) {
-//        for (TeamMember teamMember: project.getTeamMembers()) {
-//            System.out.println(teamMember.toString());
-//        }
-//    }
-
-	public void displayAllProjects() {
-		String string = projects.toString();
-		if (string != null) {
-			System.out.println("PROJECT DETAILS\t\t\t\t\tMEMBER DETAILS\n" + string);
+    public void displayTeamMembers(Project project) {
+		ArrayList<TeamMember> members = project.getTeamMembers();
+		if (members.size() > 0) {
+			for (TeamMember teamMember: project.getTeamMembers()) {
+				System.out.println("- " + teamMember.toString());
+			}
 		} else {
-			System.out.println("Project list is empty");
+			System.out.println("- The project " + '"' + project.getTitle()+ '"' + " has no team members");
+		}
+    }
+
+	public void displayAll() {
+		ArrayList<Project> inOrder = projects.inOrderTraversal();
+		if (inOrder.size() > 0) {
+			for (Project project : inOrder) {
+				System.out.println("\n" + project.toString());
+				displayTeamMembers(project);
+			}
+		} else {
+			System.out.println("The tree is empty");
 		}
 	}
 
-//    public void displayAll() {
-//        projects.inOrderTraversal();
-//    }
+	public void displayAllNumbers() {
+		ArrayList<Project> inOrder = projects.inOrderTraversal();
+		if (inOrder.size() > 0) {
+			for (Project project : inOrder) {
+				System.out.println("\n" + project.toString() + "\n- " + project.getTeamSize() + " Members");
+			}
+		} else {
+			System.out.println("The tree is empty");
+		}
+	}
 
 }

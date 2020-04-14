@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Project implements Comparable<Project> {
 
@@ -12,18 +11,8 @@ public class Project implements Comparable<Project> {
 		this.endDate = endDate;
 	}
 
-	@Override
 	public String toString() {
-		StringBuilder projectDetails = new StringBuilder(title + " (" + startDate + " - " + endDate + ")");
-		if (teamMembers.isEmpty()) {
-			projectDetails.append("\t\t No Members");
-		} else {
-			projectDetails.append("\t\t");
-			for (TeamMember teamMember : teamMembers) {
-				projectDetails.append(" ").append(teamMember.toString());
-			}
-		}
-		return projectDetails.toString();
+		return title + " (" + startDate + " - " + endDate + ")";
 	}
 
 	@Override
@@ -45,18 +34,27 @@ public class Project implements Comparable<Project> {
 	}
 
 	public void removeTeamMember(TeamMember teamMember) {
-		if (this.teamMembers.remove(teamMember)) {
-			System.out.println("The team member " + '"' + teamMember.getName() + '"' + " has been removed");
-		} else {
-			System.out.println("The team member " + '"' + teamMember.getName() + '"' + " could not be found");
-		}
+		this.teamMembers.remove(teamMember);
 	}
 
-	public void displayTeamMembers() {
-		Arrays.sort(teamMembers.toArray());
+	public TeamMember findTeamMember(String name) {
 		for (TeamMember teamMember: teamMembers) {
-			System.out.println(teamMember.toString());
+			if (teamMember.getName().equalsIgnoreCase(name))
+				return teamMember;
 		}
+		return null;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public int getTeamSize(){
+		return this.teamMembers.size();
+	}
+
+	public ArrayList<TeamMember> getTeamMembers() {
+		return teamMembers;
 	}
 
 }

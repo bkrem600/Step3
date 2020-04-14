@@ -15,7 +15,6 @@ public class BinaryTree<T extends Comparable<T>> {
 		this.root = root.remove(root, data);
 	}
 
-	@Override
 	public String toString() {
 		if (root != null) {
 			return root.toString();
@@ -24,21 +23,22 @@ public class BinaryTree<T extends Comparable<T>> {
 		}
 	}
 
-//    public ArrayList inOrderTraversal() {
-//        ArrayList inOrder = new ArrayList();
-//        inOrderHelper(root, inOrder);
-//        return inOrder;
-//    }
-//
-//    private void inOrderHelper(TreeNode<T> node, ArrayList list) {
-//        if (node == null) {
-//            return;
-//        }
-//        inOrderHelper(node.getLeftNode(), list);
-//        list.add(node.getData());
-//        inOrderHelper(node.getRightNode(), list);
-//    }
+    public ArrayList<T> inOrderTraversal() {
+        ArrayList<T> inOrder = new ArrayList<>();
+        inOrderHelper(root, inOrder);
+        return inOrder;
+    }
 
+    private void inOrderHelper(TreeNode<T> node, ArrayList<T> inOrder) {
+        if (node == null) {
+			return;
+        }
+        inOrderHelper(node.getLeftNode(), inOrder);
+		inOrder.add(node.getData());
+        inOrderHelper(node.getRightNode(), inOrder);
+	}
+
+	// NEVER USED ??
 	public T find(T data) {
 		return root.find(data);
 	}

@@ -9,9 +9,8 @@ public class TeamMember implements Comparable<TeamMember> {
 		this.division = division;
 	}
 
-	@Override
 	public String toString() {
-		return name + " (" + number + " " + division + ")";
+		return name + " (" + number + ", " + division + ")";
 	}
 
 	@Override
@@ -31,5 +30,4 @@ public class TeamMember implements Comparable<TeamMember> {
 	public String getName() {
 		return name;
 	}
-
 }
