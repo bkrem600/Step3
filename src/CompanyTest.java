@@ -108,29 +108,6 @@ public class CompanyTest {
 				case 7:
 					company.displayAllNumbers();
 					break;
-				case 8:
-					System.out.println("Populated with data for testing purposes");
-					Project project1 = new Project("test1", "01/01/18", "21/01/18");
-					Project project2 = new Project("test2", "03/06/19", "22/06/19");
-					Project project3 = new Project("test3", "06/09/20", "23/09/20");
-					Project project4 = new Project("test4", "03/01/20", "25/03/20");
-					TeamMember member1 = new TeamMember("Joe Bloggs", 1111, "Web Development");
-					TeamMember member2 = new TeamMember("Chris Douglas", 2222, "Database");
-					TeamMember member3 = new TeamMember("Boryana Kremakova", 3333, "Programming");
-					TeamMember member4 = new TeamMember("Connor Dillon", 4444, "Uml shite");
-					TeamMember member5 = new TeamMember("Benjamin Cattermole", 5555, "Please stop");
-					TeamMember member6 = new TeamMember("Finlay Ross", 6666, "I hate java");
-					company.addProject(project3);
-					company.addProject(project2);
-					company.addProject(project1);
-					company.addProject(project4);
-					company.addTeamMember(project1, member1);
-					company.addTeamMember(project1, member2);
-					company.addTeamMember(project1, member3);
-					company.addTeamMember(project2, member4);
-					company.addTeamMember(project2, member5);
-					company.addTeamMember(project3, member6);
-					break;
 				default:
 					System.out.println("Please enter a valid option from the menu");
 			}
