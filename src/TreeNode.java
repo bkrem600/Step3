@@ -20,11 +20,11 @@ public class TreeNode<T extends Comparable<T>> {
 		return treeNodeDetails ;
 	}
 
-	public void insert(T data){
+	public boolean insert(T data){
 		if (this.data.compareTo(data) > 0) {
 			if (this.leftNode == null) {
 				this.leftNode = new TreeNode<>(data);
-				return;
+				return true;
 			} else {
 				this.leftNode.insert(data);
 			}
@@ -32,10 +32,12 @@ public class TreeNode<T extends Comparable<T>> {
 		if (this.data.compareTo(data) < 0) {
 			if (this.rightNode == null) {
 				this.rightNode = new TreeNode<>(data);
+				return true;
 			} else {
 				this.rightNode.insert(data);
 			}
 		}
+		return false;
 	}
 
 	public TreeNode<T> remove(TreeNode<T> root, T data) {

@@ -34,22 +34,15 @@ public class CompanyTest {
 					}
 				case 1:
 					projectTitle = Input.getString("Project title: ");
-					Project project = company.findProject(projectTitle);
-					if (project == null) {
-						startDate = Input.getString("Project start date: ");
-						endDate = Input.getString("Project end date: ");
-						company.addProject(new Project(projectTitle, startDate, endDate));
-						System.out.println("The project " + '"' + projectTitle + '"' + " has been added");
-					} else {
-						System.out.println("The project " + '"' + projectTitle + '"' + " already exists");
-					}
+					startDate = Input.getString("Project start date: ");
+					endDate = Input.getString("Project end date: ");
+					company.addProject(new Project(projectTitle, startDate, endDate));
 					break;
 				case 2:
 					projectTitle = Input.getString("Project title: ");
-					project = company.findProject(projectTitle);
+					Project project = company.findProject(projectTitle);
 					if (project != null) {
 						company.removeProject(project);
-						System.out.println("The project " + '"' + projectTitle + '"' + " has been removed");
 					} else {
 						System.out.println("The project " + '"' + projectTitle + '"' + " could not be found");
 					}
@@ -65,7 +58,6 @@ public class CompanyTest {
 								memberNumber = Input.getInteger("Team Member Number: ");
 								memberDivision = Input.getString("Team Member Division: ");
 								company.addTeamMember(project, new TeamMember(memberName, memberNumber, memberDivision));
-								System.out.println("The team member " + '"' + memberName + '"' + " has been added");
 							} catch (Exception exception) {
 								System.out.println("Invalid value entered");
 							}
@@ -84,7 +76,6 @@ public class CompanyTest {
 						TeamMember member = project.findTeamMember(memberName);
 						if (member != null) {
 							company.removeTeamMember(project, member);
-							System.out.println("The team member " + '"' + memberName + '"' + " has been removed");
 						} else {
 							System.out.println("The team member " + '"' + memberName + '"' + " could not be found");
 						}

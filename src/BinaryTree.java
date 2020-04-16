@@ -4,11 +4,12 @@ public class BinaryTree<T extends Comparable<T>> {
 
 	private TreeNode<T> root;
 
-	public void add(T data) {
+	public boolean add(T data) {
 		if (root == null) {
 			root = new TreeNode<>(data);
+			return true;
 		}
-		root.insert(data);
+		return root.insert(data);
 	}
 
 	public void remove(T data) {

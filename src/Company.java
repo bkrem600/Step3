@@ -10,11 +10,16 @@ public class Company {
 	}
 
 	public void addProject(Project project) {
-		this.projects.add(project);
+		if (this.projects.add(project)) {
+			System.out.println("The project " + '"' + project.getTitle() + '"' + " has been added");
+		} else {
+			System.out.println("The project " + '"' + project.getTitle() + '"' + " already exists");
+		}
 	}
 
 	public void removeProject(Project project) {
 		this.projects.remove(project);
+		System.out.println("The project " + '"' + project.getTitle() + '"' + " has been removed");
 	}
 
 	public Project findProject(String title) {
@@ -31,10 +36,12 @@ public class Company {
 
 	public void addTeamMember(Project project, TeamMember teamMember) {
 		project.addTeamMember(teamMember);
+		System.out.println("The team member " + '"' + teamMember.getName() + '"' + " has been added");
 	}
 
 	public void removeTeamMember(Project project, TeamMember teamMember) {
 		project.removeTeamMember(teamMember);
+		System.out.println("The team member " + '"' + teamMember.getName() + '"' + " has been removed");
 	}
 
     public void displayTeamMembers(Project project) {
